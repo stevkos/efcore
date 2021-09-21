@@ -8,6 +8,15 @@ namespace BankIS.ConsoleApp
 {
     class Client
     {
+        public Client(string name, int age, string street, string city)
+
+        {
+            Name = name;
+            Age = age;
+            HomeAdress = new Address();
+            HomeAdress.Street = street;
+            HomeAdress.City = city;
+        }
         public string Name { get; set; }
         public int Age { get; set; }
 
