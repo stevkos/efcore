@@ -26,8 +26,7 @@ namespace BankIS.ConsoleApp
         {
             Console.WriteLine(Name);
             Console.WriteLine(Age);
-            Console.WriteLine(HomeAdress.Street);
-            Console.WriteLine(HomeAdress.City);
+            HomeAdress.PrintAdress();
         }
     }
 }

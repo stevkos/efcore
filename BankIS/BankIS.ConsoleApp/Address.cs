@@ -8,5 +8,11 @@ namespace BankIS.ConsoleApp
     {
         public string Street { get; set; }
         public string City { get; set; }
+
+        public void PrintAdress ()
+        {
+            Console.WriteLine(Street + " " + City);
+          
+        }
     }
 }
