@@ -16,6 +16,7 @@ namespace BankIS.ConsoleApp
             c2.Name = "Jana Nová";
             c2.Age = 28;
             c2.Print();
+            Console.ReadKey();
 
         }
     }
