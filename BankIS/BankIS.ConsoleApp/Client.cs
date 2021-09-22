@@ -1,38 +1,97 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Linq;
-using System.Threading.Tasks;
 using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace BankIS.ConsoleApp
 {
-    class Client
+    public class Client : IDisposable
     {
-        public Client(string name, int age, string street, string city)
+        static int Counter = 0;
 
+        public Client()
         {
-            Name = name;
-            Age = age;
-            HomeAdress = new Address();
-            HomeAdress.Street = street;
-            HomeAdress.City = city;
+            HomeAddress = new Address();
+            Counter = Counter + 1;
         }
+
+        public Client(string street, string city, string jmeno = "nezadano", int age = -1)
+        {
+            HomeAddress = new Address();
+            HomeAddress.Street = street;
+            HomeAddress.City = city;
+            Name = jmeno;
+            Age = age;
+            Counter = Counter + 1;
+        }
+
+        public Client(string jmeno = "nezadano", int age = -1)
+        {
+            HomeAddress = new Address();
+            Name = jmeno;
+            Age = age;
+            Counter = Counter + 1;
+        }
+
+
+        /// <summary>
+        /// Jméno klienta
+        /// </summary>
         public string Name { get; set; }
-        public int Age { get; set; }
 
-        public Address HomeAdress { get; set; }
+        private int _age;
+        private bool _isOverAge = false;
+        public int Age
+        {
+            get
+            {
+                if (_isOverAge)
+                    return _age;
+                else
+                    return -2;
+            }
+            set
+            {
+                if (value >= 18)
+                    _isOverAge = true;
+                else
+                    _isOverAge = false;
 
+                _age = value;
+            }
+        }
+
+        public Address HomeAddress { get; set; }
+
+        /// <summary>
+        /// Vytiskne do konzole jmeno a adresu klienta
+        /// </summary>
         public void Print()
         {
-            Console.WriteLine(Name);
-            Console.WriteLine(Age);
-            HomeAdress.PrintAdress();
+            Console.WriteLine(ToString());
         }
 
-        public void SaveToFile (string FileName)
+        public void Print(string prefix)
         {
-            File.WriteAllText(FileName, Name);
+            Console.WriteLine(prefix + " " + ToString());
+        }
+
+
+        public void SaveToFile(string pathToFile)
+        {
+            File.WriteAllText(pathToFile, ToString());
+        }
+
+        public override string ToString()
+        {
+            return $"{Name};{Age};{HomeAddress.Street};{HomeAddress.City}";
+        }
+
+        public void Dispose()
+        {
+            // zavreni network spojeni atd.   
         }
     }
 }
