@@ -35,7 +35,7 @@ namespace BankIS.ConsoleApp
             Client.SaveListToFile("allclients.txt", Clients);*/
 
             Console.WriteLine ("Načítám clients ze souboru");
-            var clients = Client.ReadListFromFile("allclients.txt");
+            var clients = Client.ReadListFromFile("dataset_1.txt");
 
             var cnt = clients.Count;
             Console.WriteLine($"Počet: {cnt}");
@@ -52,15 +52,15 @@ namespace BankIS.ConsoleApp
             //  var result = clients.OrderBy(client => client.Age).ToList();
             // Console.WriteLine($"Řazení podle věku");
 
-            var result = clients.Where(client => client.HomeAddress.City == "Ostrava").OrderBy(client => client.Name).ToList();
-             Console.WriteLine($"Řazení y Ostravy podle jména");
+            var result = clients.Where(Client => Client.HomeAddress.City == "Olomouc" && Client.Age >= 20 && Client.Age <= 40).ToList();
+             Console.WriteLine("Olomouc mezi 20 a 40");
+            Console.WriteLine(result);
 
+                foreach (var lst in result)
+                {
+                    lst.Print();
 
-            foreach (var lst in result)
-            {
-                lst.Print();
-
-            }
+             }
             Console.ReadKey();
 
         }
