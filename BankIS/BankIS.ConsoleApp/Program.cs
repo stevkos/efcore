@@ -31,7 +31,7 @@ namespace BankIS.ConsoleApp
                 Lst.Print();
                 
             }
-
+            Client.SaveListToFile("allclients.txt", Clients);
             Console.ReadKey();
 
 

@@ -84,6 +84,8 @@ namespace BankIS.ConsoleApp
             File.WriteAllText(pathToFile, ToString());
         }
 
+       
+
         public override string ToString()
         {
             return $"{Name};{Age};{HomeAddress.Street};{HomeAddress.City}";
@@ -92,6 +94,15 @@ namespace BankIS.ConsoleApp
         public void Dispose()
         {
             // zavreni network spojeni atd.   
+        }
+
+        public static void SaveListToFile(string pathToFile, List<Client> clnList)
+        {
+            foreach (var client in clnList)
+            {
+                var clientWithNewLine = client.ToString() + Environment.NewLine;
+                File.AppendAllText(pathToFile, clientWithNewLine);
+            }
         }
     }
 }
