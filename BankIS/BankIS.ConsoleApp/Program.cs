@@ -54,7 +54,7 @@ namespace BankIS.ConsoleApp
 
             var result = clients.Where(Client => Client.HomeAddress.City == "Olomouc" && Client.Age >= 20 && Client.Age <= 40).ToList();
              Console.WriteLine("Olomouc mezi 20 a 40");
-            Console.WriteLine(result);
+          //  Console.WriteLine(result);
 
                 foreach (var lst in result)
                 {
