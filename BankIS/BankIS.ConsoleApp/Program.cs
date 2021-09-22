@@ -11,7 +11,7 @@ namespace BankIS.ConsoleApp
         {
             Console.WriteLine("Hello World!");
 
-            var c1 = new Client(city: "Brno", street: "Kopečná 23", jmeno: "Martin Novák", age: 55);
+        /*    var c1 = new Client(city: "Brno", street: "Kopečná 23", jmeno: "Martin Novák", age: 55);
             var c2 = new Client("Tovární 17", "Praha", "Martina Novotná", 31);
             var c3 = new Client("Okružní 13", "Otrokovice", "Zdena Černá", 13);
             var c4 = new Client("Eles 11", "Zlín", "Marie Neveselá", 18);
@@ -31,7 +31,18 @@ namespace BankIS.ConsoleApp
                 Lst.Print();
                 
             }
-            Client.SaveListToFile("allclients.txt", Clients);
+            Client.SaveListToFile("allclients.txt", Clients);*/
+
+            Console.WriteLine ("Načítám clients ze souboru");
+            var client = Client.ReadListFromFile("allclients.txt");
+
+            foreach (var lst in client)
+            {
+                lst.Print();
+
+            }
+
+
             Console.ReadKey();
 
 
