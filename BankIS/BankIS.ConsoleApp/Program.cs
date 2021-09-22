@@ -49,8 +49,13 @@ namespace BankIS.ConsoleApp
             //  var result = clients.Where(client => client.Age > age).ToList();
             //  Console.WriteLine($"Přes {age}:");
 
-            var result = clients.OrderBy(client => client.Age).ToList();
-            Console.WriteLine($"Řazení podle věku");
+            //  var result = clients.OrderBy(client => client.Age).ToList();
+            // Console.WriteLine($"Řazení podle věku");
+
+             var result = clients.Where(client => client.Age >= 18).OrderBy(client => client.Age).ToList();
+             Console.WriteLine($"Řazení podle věku starší než 18");
+
+
             foreach (var lst in result)
             {
                 lst.Print();
