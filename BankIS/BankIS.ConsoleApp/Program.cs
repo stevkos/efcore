@@ -52,15 +52,15 @@ namespace BankIS.ConsoleApp
             //  var result = clients.OrderBy(client => client.Age).ToList();
             // Console.WriteLine($"Řazení podle věku");
 
-            var result = clients.Where(Client => Client.HomeAddress.City == "Olomouc" && Client.Age >= 20 && Client.Age <= 40).ToList();
-             Console.WriteLine("Olomouc mezi 20 a 40");
-          //  Console.WriteLine(result);
+            var result = clients.Where(Client => Client.HomeAddress.City ==  "Brno").Count();
+             Console.WriteLine("Počet lidí v Brně");
+            Console.WriteLine(result);
 
-                foreach (var lst in result)
-                {
-                    lst.Print();
+           //     foreach (var lst in result)
+           //     {
+           //         lst.Print();
 
-             }
+            // }
             Console.ReadKey();
 
         }
