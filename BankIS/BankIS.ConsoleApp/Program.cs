@@ -52,8 +52,8 @@ namespace BankIS.ConsoleApp
             //  var result = clients.OrderBy(client => client.Age).ToList();
             // Console.WriteLine($"Řazení podle věku");
 
-            var result = clients.Where(Client => Client.HomeAddress.City ==  "Brno").Count();
-             Console.WriteLine("Počet lidí v Brně");
+            var result = clients.Where(Client => Client.HomeAddress.City ==  "Praga").Average(Client => Client.Age);
+             Console.WriteLine("Průměrný věk Praha");
             Console.WriteLine(result);
 
            //     foreach (var lst in result)
