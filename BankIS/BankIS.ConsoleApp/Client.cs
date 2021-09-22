@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace BankIS.ConsoleApp
 {
@@ -20,13 +21,18 @@ namespace BankIS.ConsoleApp
         public string Name { get; set; }
         public int Age { get; set; }
 
-        public  Address HomeAdress { get; set;}
+        public Address HomeAdress { get; set; }
 
-        public void Print ()
+        public void Print()
         {
             Console.WriteLine(Name);
             Console.WriteLine(Age);
             HomeAdress.PrintAdress();
+        }
+
+        public void SaveToFile (string FileName)
+        {
+            File.WriteAllText(FileName, Name);
         }
     }
 }
