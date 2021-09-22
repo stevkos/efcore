@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
+using System.Linq;
 
 namespace BankIS.ConsoleApp
 {
@@ -34,18 +35,25 @@ namespace BankIS.ConsoleApp
             Client.SaveListToFile("allclients.txt", Clients);*/
 
             Console.WriteLine ("Načítám clients ze souboru");
-            var client = Client.ReadListFromFile("allclients.txt");
+            var clients = Client.ReadListFromFile("allclients.txt");
 
-            foreach (var lst in client)
+            var cnt = clients.Count;
+            Console.WriteLine($"Počet: {cnt}");
+
+            foreach (var lst in clients)
             {
                 lst.Print();
 
             }
+            int age = 30;
+            var overage = clients.Where(client => client.Age > age).ToList();
+            Console.WriteLine($"Přes {age}:");
+            foreach (var lst in overage)
+            {
+                lst.Print();
 
-
+            }
             Console.ReadKey();
-
-
 
         }
 
