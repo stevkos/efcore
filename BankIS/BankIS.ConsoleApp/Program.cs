@@ -45,10 +45,13 @@ namespace BankIS.ConsoleApp
                 lst.Print();
 
             }
-            int age = 30;
-            var overage = clients.Where(client => client.Age > age).ToList();
-            Console.WriteLine($"Přes {age}:");
-            foreach (var lst in overage)
+            //  int age = 30;
+            //  var result = clients.Where(client => client.Age > age).ToList();
+            //  Console.WriteLine($"Přes {age}:");
+
+            var result = clients.OrderBy(client => client.Age).ToList();
+            Console.WriteLine($"Řazení podle věku");
+            foreach (var lst in result)
             {
                 lst.Print();
 
