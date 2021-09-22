@@ -28,8 +28,8 @@ namespace BankIS.ConsoleApp
 
             foreach (var Lst in Clients)
             {
-                Console.Write(Lst.Name + " " + Lst.Age + " ");
-                Lst.HomeAddress.Print();
+                Lst.Print();
+                
             }
 
             Console.ReadKey();
