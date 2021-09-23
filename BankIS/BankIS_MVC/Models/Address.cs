@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BankIS.ConsoleApp
+namespace BankIS.MVC.Models
 {
     public class Address
     {
@@ -23,10 +23,7 @@ namespace BankIS.ConsoleApp
 
         public string City { get; set; }
 
-        public void Print()
-        {
-            Console.WriteLine("Ulice: {0}, Město {1}", Street, City);
-        }
+        public string ZipCode { get; set; }
 
     }
 }

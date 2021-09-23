@@ -1,39 +1,63 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BankIS.ConsoleApp
+namespace BankIS.MVC.Models
 {
+   
     public class Client
     {
 
         public Client()
         {
             HomeAddress = new Address();
+
         }
 
-        public Client(string street, string city, string jmeno = "nezadano", int age = -1)
-        {
-            HomeAddress = new Address();
-            HomeAddress.Street = street;
-            HomeAddress.City = city;
-            Name = jmeno;
-            Age = age;
-        }
-
+        [Key]
         public int Id { get; set; }
 
-        /// <summary>
-        /// Jméno klienta
-        /// </summary>
-        public string Name { get; set; }
+        [MaxLength(100)]
+        public string FirstName { get; set; }
 
-        public int Age { get; set; }
+        [MaxLength(100)]
+        [Required]
+        public string LastName { get; set; }
+
+        public DateTime? DateOfBirth { get; set; }
 
         public Address HomeAddress { get; set; }
+
+        public List<Transaction> Transactions { get; set; } = new List<Transaction>();
+
+        [NotMapped]
+        public int Age
+        {
+            get
+            {
+                return GetAge();
+            }
+        }
+        public double AccountSum ()
+        {
+            return Transactions.Select(t => t.Value).Sum();
+        }
+        public int GetAge()
+        {
+            if (DateOfBirth.HasValue)
+            {
+                return DateTime.Now.Year - DateOfBirth.Value.Year;
+            }
+            else
+            {
+                throw new Exception("DateOfBirth is null. Not suppported.");
+            }
+        }
 
         /// <summary>
         /// Vytiskne do konzole jmeno a adresu klienta
@@ -55,10 +79,8 @@ namespace BankIS.ConsoleApp
 
         public override string ToString()
         {
-            return $"{Name};{Age};{HomeAddress.Street};{HomeAddress.City}";
+            return $"{FirstName};{LastName};{Age};{HomeAddress.Street};{HomeAddress.City}";
         }
-
-
 
 
         public static void SaveClientsToFile(IEnumerable<Client> clients, string file)
@@ -70,25 +92,5 @@ namespace BankIS.ConsoleApp
             }
         }
 
-        public static List<Client> LoadClients(string file)
-        {
-            List<Client> result = new List<Client>();
-
-            var lines = File.ReadAllLines(file);
-
-            foreach (var line in lines)
-            {
-                var items = line.Split(';');
-                var name = items[0];
-                var age = int.Parse(items[1]);
-                var street = items[2];
-                var city = items[3];
-
-                Client c = new Client(street: street, city: city, jmeno: name, age: age);
-                result.Add(c);
-            }
-
-            return result;
-        }
     }
 }

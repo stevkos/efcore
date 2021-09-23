@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Net.Http;
 using System.Linq;
+using System.Net.Http;
 
 namespace BankIS.ConsoleApp
 {
@@ -12,60 +13,46 @@ namespace BankIS.ConsoleApp
         {
             Console.WriteLine("Hello World!");
 
-        /*    var c1 = new Client(city: "Brno", street: "Kopečná 23", jmeno: "Martin Novák", age: 55);
-            var c2 = new Client("Tovární 17", "Praha", "Martina Novotná", 31);
-            var c3 = new Client("Okružní 13", "Otrokovice", "Zdena Černá", 13);
-            var c4 = new Client("Eles 11", "Zlín", "Marie Neveselá", 18);
-            var c5 = new Client("Malinovského 21", "Ostrava", "Martina Nová", 22);
-
-            List<Client> Clients = new List<Client>();
-            Clients.Add(c1);
-            Clients.Add(c2);
-            Clients.Add(c3);
-            Clients.Add(c4);
-            Clients.Add(c5);
-            var cnt = Clients.Count;
-            Console.WriteLine($"Počet klienů v seznamu: {cnt}");
-
-            foreach (var Lst in Clients)
+            using (BankContext context = new BankContext())
             {
-                Lst.Print();
+                //context.Clients.FromSqlRaw("SELECT * ");
+
+                var cnt = context.Clients.Count();
+                Console.WriteLine($"Počet klientů v seznamu: {cnt}");
+                Console.WriteLine();
+
+                //seskupit podle mesta
+
+                var groupped = context.Clients
+                    .GroupBy(x => x.Age)
+                    ;
+
+                //foreach (var group in groupped)
+                //{
+                //    Console.WriteLine($"podle veku:  {group.Key} - pocet: ");
+
+                foreach (var client in groupped)
+                {
+                    Console.WriteLine("    " + client);
+                }
                 
+
+                Console.WriteLine("x");
+                Console.ReadKey();
+
+                //context.Remove(oldest);
+                //context.SaveChanges();
+
+                //context.SaveChanges();
+
+                // LINQ
+
+                //foreach (var item in result)
+                //{
+                //    Console.WriteLine($"{item}");
+                //}
             }
-            Client.SaveListToFile("allclients.txt", Clients);*/
-
-            Console.WriteLine ("Načítám clients ze souboru");
-            var clients = Client.ReadListFromFile("dataset_1.txt");
-
-            var cnt = clients.Count;
-            Console.WriteLine($"Počet: {cnt}");
-
-            foreach (var lst in clients)
-            {
-                lst.Print();
-
-            }
-            //  int age = 30;
-            //  var result = clients.Where(client => client.Age > age).ToList();
-            //  Console.WriteLine($"Přes {age}:");
-
-            //  var result = clients.OrderBy(client => client.Age).ToList();
-            // Console.WriteLine($"Řazení podle věku");
-
-            var result = clients.Where(Client => Client.HomeAddress.City ==  "Praga").Average(Client => Client.Age);
-             Console.WriteLine("Průměrný věk Praha");
-            Console.WriteLine(result);
-
-           //     foreach (var lst in result)
-           //     {
-           //         lst.Print();
-
-            // }
-            Console.ReadKey();
-
         }
 
     }
-
 }
-    

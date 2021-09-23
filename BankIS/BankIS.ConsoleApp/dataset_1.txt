@@ -1,4 +1,4 @@
-akub Novotný;49;Pod Kaštany;Olomouc
+Jakub Novotný;49;Pod Kaštany;Olomouc
 Martina Vyskočilová;22;Třešňová;Drážďany
 Viktor Novák;45;Dubová;Ostrava
 Martina Fialová;36;Bzenecká;Ostrava
